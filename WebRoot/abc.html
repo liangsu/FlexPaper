@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>abc.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.extensions.min.js"></script>
+	<script type="text/javascript" src="js/flexpaper.js"></script>
+	<script type="text/javascript" src="js/flexpaper_handlers.js"></script>
+  </head>
+  
+  <body>
+    <div id="documentViewer" class="flexpaper_viewer" style="position:absolute;left:10px;top:10px;width:770px;height:500px"></div>
+    
+    <script type="text/javascript">
+    		var doc = "a.pdf";
+    		var i = 1;
+    
+			function getDocumentUrl(document){
+				var url = doc + "_"+i+".swf";
+				i++;
+				return url;     
+			}
+			function getDocQueryServiceUrl(document){
+				return "2";
+			}
+			var startDocument = doc;
+
+			function append_log(msg){
+				$('#txt_eventlog').val(msg+'\n'+$('#txt_eventlog').val());
+			}
+
+			String.format = function() {
+				var s = arguments[0];
+				for (var i = 0; i < arguments.length - 1; i++) {
+					var reg = new RegExp("\\{" + i + "\\}", "gm");
+					s = s.replace(reg, arguments[i + 1]);
+				}
+			
+				return s;
+			};
+
+			$('#documentViewer').FlexPaperViewer({
+				 config : {
+					 DOC : escape(getDocumentUrl(startDocument)),
+					 Scale : 0.6, 
+					 ZoomTransition : 'easeOut',
+					 ZoomTime : 0.5, 
+					 ZoomInterval : 0.1,
+					 FitPageOnLoad : true,
+					 FitWidthOnLoad : false, 
+					 FullScreenAsMaxWindow : false,
+					 ProgressiveLoading : false,
+					 MinZoomSize : 0.2,
+					 MaxZoomSize : 5,
+					 SearchMatchAll : false,
+					 RenderingOrder : 'flash,flash',
+
+					 ViewModeToolsVisible : true,
+					 ZoomToolsVisible : true,
+					 NavToolsVisible : true,
+					 CursorToolsVisible : true,
+					 SearchToolsVisible : true,
+
+					 DocSizeQueryService : "2",
+					 jsDirectory : 'js/',
+					 localeDirectory : 'locale/',
+
+					 JSONDataType : 'jsonp',
+					 key : '',
+
+					 WMode : 'window',
+					 localeChain: 'zh_CN'
+					 }
+			});
+		</script>
+  </body>
+</html>
